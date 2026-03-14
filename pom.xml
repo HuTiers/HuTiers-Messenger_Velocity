@@ -16,6 +16,17 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <distributionManagement>
+        <repository>
+            <id>jgj52-releases</id>
+            <url>https://maven.jgj52.hu/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>jgj52-snapshots</id>
+            <url>https://maven.jgj52.hu/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <profiles>
         <profile>
             <id>release</id>
