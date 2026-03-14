@@ -9,7 +9,7 @@ import java.util.function.Consumer;
 import static hu.jgj52.huTiersMessengerVelocity.HuTiersMessengerVelocity.jedis;
 
 public class Messenger {
-    private static final ExecutorService thread = Executors.newSingleThreadExecutor(r -> new Thread(r, "hutiers-manager"));
+    private static final ExecutorService thread = Executors.newSingleThreadExecutor(r -> new Thread(r, "hutiers-messenger"));
 
 
     public static void listen(String channel, Consumer<String> consumer) {

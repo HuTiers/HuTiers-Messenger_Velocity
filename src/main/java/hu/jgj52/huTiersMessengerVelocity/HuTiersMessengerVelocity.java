@@ -9,7 +9,7 @@ import redis.clients.jedis.JedisPooled;
 
 import java.util.Map;
 
-@Plugin(id = "hutiers-messenger_velocity", name = "HuTiers-Messenger Velocity", version = "1.3", authors = {"JGJ52"})
+@Plugin(id = "hutiers-messenger_velocity", name = "HuTiers-Messenger Velocity", version = "1.4", authors = {"JGJ52"})
 public class HuTiersMessengerVelocity {
 
     public static JedisPooled jedis;
