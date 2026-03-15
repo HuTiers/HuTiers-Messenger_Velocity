@@ -6,7 +6,7 @@
 
     <groupId>hu.jgj52</groupId>
     <artifactId>HuTiers-Messenger_Velocity</artifactId>
-    <version>1.4</version>
+    <version>1.5</version>
     <packaging>jar</packaging>
 
     <name>HuTiers-Messenger_Velocity</name>

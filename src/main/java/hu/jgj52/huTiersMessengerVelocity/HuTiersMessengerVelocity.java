@@ -9,11 +9,15 @@ import redis.clients.jedis.JedisPooled;
 
 import java.util.Map;
 
-@Plugin(id = "hutiers-messenger_velocity", name = "HuTiers-Messenger Velocity", version = "1.4", authors = {"JGJ52"})
+@Plugin(id = "hutiers-messenger_velocity", name = "HuTiers-Messenger Velocity", version = "1.5", authors = {"JGJ52"})
 public class HuTiersMessengerVelocity {
 
     public static JedisPooled jedis;
     private final Logger logger;
+    public static String host;
+    public static int port;
+    public static String user;
+    public static String password;
 
     @Inject
     public HuTiersMessengerVelocity(Logger logger) {
@@ -27,10 +31,10 @@ public class HuTiersMessengerVelocity {
             Config config = new Config("hutiersmessenger");
             config.load();
             Map<String, Object> cfg = config.getConfig();
-            String host = cfg.get("host").toString();
-            int port = Integer.parseInt(cfg.get("port").toString());
-            String user = cfg.get("user").toString();
-            String password = cfg.get("password").toString();
+            host = cfg.get("host").toString();
+            port = Integer.parseInt(cfg.get("port").toString());
+            user = cfg.get("user").toString();
+            password = cfg.get("password").toString();
             jedis = new JedisPooled(host, port, user, password);
             logger.info("HuTiers Messenger successfully connected!");
         } catch (Exception e) {

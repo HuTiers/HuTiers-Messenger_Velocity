@@ -1,37 +1,29 @@
 package hu.jgj52.huTiersMessengerVelocity;
 
+import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPubSub;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
-import static hu.jgj52.huTiersMessengerVelocity.HuTiersMessengerVelocity.jedis;
+import static hu.jgj52.huTiersMessengerVelocity.HuTiersMessengerVelocity.*;
 
 public class Messenger {
     private static final ExecutorService thread = Executors.newSingleThreadExecutor(r -> new Thread(r, "hutiers-messenger"));
 
-
     public static void listen(String channel, Consumer<String> consumer) {
-        thread.submit(() -> {
-            if (jedis == null) {
-                try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
-                listen(channel, consumer);
-                return;
-            }
-
-            try {
-                jedis.subscribe(new JedisPubSub() {
+        new Thread(() -> {
+            try (Jedis sub = new Jedis(host, port)) {
+                sub.auth(user, password);
+                sub.subscribe(new JedisPubSub() {
                     @Override
                     public void onMessage(String ch, String message) {
                         consumer.accept(message);
                     }
                 }, channel);
-            } catch (Exception e) {
-                e.printStackTrace();
-                try { Thread.sleep(1000); } catch (InterruptedException ignored) {}
             }
-        });
+        }, "redis-listener-" + channel).start();
     }
 
     public static void send(String channel, String message) {
